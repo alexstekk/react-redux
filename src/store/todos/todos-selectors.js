@@ -1,7 +1,3 @@
-export const selectAllTodos = (state) => state.todos;
-
-export const selectActiveTodos = (state) => state.todos.filter((todo) => !todo.completed);
-
 export const selectVisibleTodos = (state, filter) => {
 	switch (filter) {
 		case 'All': {
