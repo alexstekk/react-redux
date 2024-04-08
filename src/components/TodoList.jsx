@@ -17,7 +17,7 @@ export const TodoList = () => {
 						onChange={() => {dispatch(onToggleTodo(todo.id))}}
 					/>
 					{todo.title}
-					<button>Remove Todo</button>
+					{/* <button>Remove Todo</button> */}
 				</li>
 			))}
 		</div>
