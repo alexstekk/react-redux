@@ -1,22 +1,10 @@
 import { createStore } from 'redux';
-import { loadState, saveState } from './local-storage';
-import throttle from 'lodash/throttle';
-
 import { rootReducer } from './root-reducer';
+import { composeWithDevTools } from '@redux-devtools/extension';
+import { applyMiddleware } from 'redux';
+import { thunk } from 'redux-thunk';
 
-export const configureStore = () => {
-	const persistedState = loadState();
-
-	const store = createStore(rootReducer, persistedState, window.__REDUX_DEVTOOLS_EXTENSION__ && window.__REDUX_DEVTOOLS_EXTENSION__());
-
-	store.subscribe(
-		throttle(() => {
-			saveState({
-				todos: store.getState().todos,
-			});
-		}, 1000)
-	);
-
-	return store;
-};
-//store
+export const store = createStore(
+	rootReducer,
+	composeWithDevTools(applyMiddleware(thunk))
+);

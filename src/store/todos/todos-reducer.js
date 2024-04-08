@@ -1,24 +1,12 @@
-import { ADD_TODO, REMOVE_TODO, TOGGLE_TODO } from './todos-const';
+import { ADD_TODOS } from './todos-actions';
 
-export const todos = (state = [], action) => {
-	switch (action.type) {
-		case ADD_TODO: {
-			return [
-				...state,
-				{
-					id: Date.now(),
-					title: action.title,
-					completed: false,
-				},
-			];
+export const todosReducer = (state = [], { type, payload }) => {
+	switch (type) {
+		case ADD_TODOS: {
+			return payload;
 		}
-		case REMOVE_TODO: {
-			return state.filter((todo) => todo.id !== action.id);
-		}
-		case TOGGLE_TODO: {
-			return state.map((todo) => (todo.id === action.id ? { ...todo, completed: true } : todo));
-		}
-		default:
+		default: {
 			return state;
+		}
 	}
 };

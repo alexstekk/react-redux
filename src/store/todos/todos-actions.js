@@ -1,23 +1,9 @@
-import { ADD_TODO, REMOVE_TODO, TOGGLE_TODO } from './todos-const';
+export const ADD_TODOS = 'ADD_TODOS';
 
-//action creators
-export const addTodo = (title) => {
-	return {
-		type: ADD_TODO,
-		title,
-	};
-};
+export const addTodos = (todos) => ({ type: ADD_TODOS, payload: todos });
 
-export const removeTodo = (id) => {
-	return {
-		type: REMOVE_TODO,
-		id,
-	};
-};
-
-export const toggleTodo = (id) => {
-	return {
-		type: TOGGLE_TODO,
-		id,
-	};
+export const loadTodos = () => (dispatch) => {
+	fetch('https://jsonplaceholder.typicode.com/todos')
+		.then((res) => res.json())
+		.then((data) => dispatch(addTodos(data)));
 };

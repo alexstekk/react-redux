@@ -1,16 +1,23 @@
 import './App.css';
-import { Filters } from './components/Filters';
-import { NewTodo } from './components/NewTodo';
 import { TodoList } from './components/TodoList';
+import { UserList } from './components/UserList';
+import { useEffect } from 'react';
+import { loadUsers } from './Store/users/users-actions';
+import { loadTodos } from './Store/todos/todos-actions';
+import { useDispatch } from 'react-redux';
 
 function App() {
+	const dispatch = useDispatch();
+	useEffect(() => {
+		dispatch(loadUsers());
+		dispatch(loadTodos());
+	}, []);
 	return (
-		<div className='App'>
+		<>
 			<h1>React + Redux</h1>
-			<NewTodo />
-			<Filters />
 			<TodoList />
-		</div>
+			<UserList />
+		</>
 	);
 }
 
